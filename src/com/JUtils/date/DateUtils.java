@@ -81,15 +81,16 @@ public class DateUtils {
 	 * @date Dec 30, 2013
 	 * @param format
 	 * @return Date
+	 * @throws Exception 
 	 */
-	public static Date getCurrentDate(String format){
+	public static Date getCurrentDate(String format) throws Exception{
 		 SimpleDateFormat sdf = getFormat(format);
 		 String dateS = getCurrentTime(format);
 		 Date date = null;
 		 try {
-			date = sdf.parse(dateS);
+			 date = sdf.parse(dateS);
 		} catch (ParseException e) {
-			e.printStackTrace();
+			throw new Exception("时间转换出错..");
 		}
 		return date;
 	}
@@ -99,43 +100,10 @@ public class DateUtils {
 	 * @author chenssy
 	 * @date Dec 30, 2013
 	 * @return Date
+	 * @throws Exception 
 	 */
-	public static Date getCurrentDate(){
+	public static Date getCurrentDate() throws Exception{
 		return getCurrentDate(DateUtils.DATE_FORMAT2);
-	}
-	
-	/**
-	 * 
-	 * 格式转换<br>
-	 * yyyy-MM-dd hh:mm:ss 和 yyyyMMddhhmmss 相互转换<br>
-	 * yyyy-mm-dd 和yyyymmss 相互转换
-	 * @author chenssy
-	 * @date Dec 26, 2013
-	 * @param value 
-	 * 				日期
-	 * @return String
-	 */
-	public static String stringFormat(String value) {
-		String sReturn = "";
-		if (value == null || "".equals(value))
-			return sReturn;
-		if (value.length() == 14) {   //长度为14格式转换成yyyy-mm-dd hh:mm:ss
-			sReturn = value.substring(0, 4) + "-" + value.substring(4, 6) + "-" + value.substring(6, 8) + " "
-					+ value.substring(8, 10) + ":" + value.substring(10, 12) + ":" + value.substring(12, 14);
-			return sReturn;
-		}
-		if (value.length() == 19) {   //长度为19格式转换成yyyymmddhhmmss
-			sReturn = value.substring(0, 4) + value.substring(5, 7) + value.substring(8, 10) + value.substring(11, 13)
-					+ value.substring(14, 16) + value.substring(17, 19);
-			return sReturn;
-		}
-		if(value.length() == 10){     //长度为10格式转换成yyyymmhh
-			sReturn = value.substring(0, 4) + value.substring(5,7) + value.substring(8,10);
-		}
-		if(value.length() == 8){      //长度为8格式转化成yyyy-mm-dd
-			sReturn = value.substring(0, 4) + "-" + value.substring(4, 6) + "-" + value.substring(6, 8);
-		}
-		return sReturn;
 	}
 	
 	/**
@@ -146,8 +114,9 @@ public class DateUtils {
 	 * @param date 为空时，默认为当前时间
 	 * @param format 默认格式为：yyyy-MM-dd HH:mm:ss
 	 * @return String
+	 * @throws Exception 
 	 */
-	public static String addYearToDate(int year,Date date,String format){
+	public static String addYearToDate(int year,Date date,String format) throws Exception{
 		Calendar calender = getCalendar(date,format);
 		SimpleDateFormat sdf = getFormat(format);
 		
@@ -164,8 +133,9 @@ public class DateUtils {
 	 * @param date 为空时，默认为当前时间
 	 * @param format 默认格式为：yyyy-MM-dd HH:mm:ss
 	 * @return String
+	 * @throws Exception 
 	 */
-	public static String addYearToDate(int year,String date,String format){
+	public static String addYearToDate(int year,String date,String format) throws Exception{
 		Date newDate = new Date();
 		if(null != date && !"".equals(date)){
 			newDate = string2Date(date, format);
@@ -182,8 +152,9 @@ public class DateUtils {
 	 * @param date 指定时间
 	 * @param format 指定格式 为空默认 yyyy-mm-dd HH:mm:ss
 	 * @return String
+	 * @throws Exception 
 	 */
-	public static String addMothToDate(int month,Date date,String format) {
+	public static String addMothToDate(int month,Date date,String format) throws Exception{
 		Calendar calender = getCalendar(date,format);
 		SimpleDateFormat sdf = getFormat(format);
 		
@@ -200,8 +171,9 @@ public class DateUtils {
 	 * @param date 指定时间
 	 * @param format 指定格式 为空默认 yyyy-mm-dd HH:mm:ss
 	 * @return String
+	 * @throws Exception 
 	 */
-	public static String addMothToDate(int month,String date,String format) {
+	public static String addMothToDate(int month,String date,String format) throws Exception{
 		Date newDate = new Date();
 		if(null != date && !"".equals(date)){
 			newDate = string2Date(date, format);
@@ -218,8 +190,9 @@ public class DateUtils {
 	 * @param date 指定日期
 	 * @param format 日期格式 为空默认 yyyy-mm-dd HH:mm:ss
 	 * @return String
+	 * @throws Exception 
 	 */
-	public static String addDayToDate(int day,Date date,String format) {
+	public static String addDayToDate(int day,Date date,String format) throws Exception{
 		Calendar calendar = getCalendar(date, format);
 		SimpleDateFormat sdf = getFormat(format);
 		
@@ -236,8 +209,9 @@ public class DateUtils {
 	 * @param date 指定日期
 	 * @param format 日期格式 为空默认 yyyy-mm-dd HH:mm:ss
 	 * @return String
+	 * @throws Exception 
 	 */
-	public static String addDayToDate(int day,String date,String format) {
+	public static String addDayToDate(int day,String date,String format) throws Exception{
 		Date newDate = new Date();
 		if(null != date && !"".equals(date)){
 			newDate = string2Date(date, format);
@@ -254,8 +228,9 @@ public class DateUtils {
 	 * @param date 指定日期
 	 * @param format 日期格式 为空默认 yyyy-mm-dd HH:mm:ss
 	 * @return String
+	 * @throws Exception 
 	 */
-	public static String addHourToDate(int hour,Date date,String format) {
+	public static String addHourToDate(int hour,Date date,String format) throws Exception{
 		Calendar calendar = getCalendar(date, format);
 		SimpleDateFormat sdf = getFormat(format);
 		
@@ -272,8 +247,9 @@ public class DateUtils {
 	 * @param date 指定日期
 	 * @param format 日期格式 为空默认 yyyy-mm-dd HH:mm:ss
 	 * @return String
+	 * @throws Exception 
 	 */
-	public static String addHourToDate(int hour,String date,String format) {
+	public static String addHourToDate(int hour,String date,String format) throws Exception{
 		Date newDate = new Date();
 		if(null != date && !"".equals(date)){
 			newDate = string2Date(date, format);
@@ -290,8 +266,9 @@ public class DateUtils {
 	 * @param date 指定日期 
 	 * @param format 日期格式 为空默认 yyyy-mm-dd HH:mm:ss
 	 * @return String
+	 * @throws Exception 
 	 */
-	public static String addMinuteToDate(int minute,Date date,String format) {
+	public static String addMinuteToDate(int minute,Date date,String format) throws Exception{
 		Calendar calendar = getCalendar(date, format);
 		SimpleDateFormat sdf = getFormat(format);
 		
@@ -308,8 +285,9 @@ public class DateUtils {
 	 * @param date 指定日期 
 	 * @param format 日期格式 为空默认 yyyy-mm-dd HH:mm:ss
 	 * @return String
+	 * @throws Exception 
 	 */
-	public static String addMinuteToDate(int minute,String date,String format){
+	public static String addMinuteToDate(int minute,String date,String format) throws Exception{
 		Date newDate = new Date();
 		if(null != date && !"".equals(date)){
 			newDate = string2Date(date, format);
@@ -326,8 +304,9 @@ public class DateUtils {
 	 * @param date 指定日期
 	 * @param format 日期格式 为空默认 yyyy-mm-dd HH:mm:ss
 	 * @return String
+	 * @throws Exception 
 	 */
-	public static String addSecondToDate(int second,Date date,String format){
+	public static String addSecondToDate(int second,Date date,String format) throws Exception{
 		Calendar calendar = getCalendar(date, format);
 		SimpleDateFormat sdf = getFormat(format);
 		
@@ -346,7 +325,7 @@ public class DateUtils {
 	 * @return String
 	 * @throws Exception 
 	 */
-	public static String addSecondToDate(int second,String date,String format){
+	public static String addSecondToDate(int second,String date,String format) throws Exception{
 		Date newDate = new Date();
 		if(null != date && !"".equals(date)){
 			newDate = string2Date(date, format);
@@ -362,8 +341,9 @@ public class DateUtils {
 	 * @param date 时间 
 	 * @param format 格式
 	 * @return Calendar
+	 * @throws Exception 
 	 */
-	public static Calendar getCalendar(Date date,String format){
+	public static Calendar getCalendar(Date date,String format) throws Exception{
 		if(date == null){
 			date = getCurrentDate(format);
 		}
@@ -396,20 +376,20 @@ public class DateUtils {
 	 * @param value 需要转换的字符串
 	 * @param format 日期格式 
 	 * @return Date
+	 * @throws Exception 
 	 */
-	public static Date string2Date(String value,String format){
+	public static Date string2Date(String value,String format) throws Exception{
 		if(value == null || "".equals(value)){
 			return null;
 		}
 		
 		SimpleDateFormat sdf = getFormat(format);
 		Date date = null;
-		
+		value = formatDate(value, format);
 		try {
-			value = formatDate(value, format);
 			date = sdf.parse(value);
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (ParseException e) {
+			throw new Exception("时间转换出错..");
 		}
 		return date;
 	}
@@ -439,8 +419,10 @@ public class DateUtils {
 	 * @param value 时间
 	 * @param format 指定格式
 	 * @return
+	 * @throws Exception 
+	 * @throws ParseException 
 	 */
-	public static String formatDate(String date,String format) {
+	public static String formatDate(String date,String format) throws Exception{
 		if(ValidateHelper.isEmpty(date) || ValidateHelper.isEmpty(format)){
 			return "";
 		}
@@ -501,8 +483,9 @@ public class DateUtils {
 	 *
 	 * @param value
 	 * @return
+	 * @throws Exception 
 	 */
-	public static String formatDate(String value){
+	public static String formatDate(String value) throws Exception{
 		return getFormat(DateUtils.DATE_FORMAT2).format(string2Date(value, DateUtils.DATE_FORMAT2));
 	}
 	
@@ -525,8 +508,9 @@ public class DateUtils {
 	 * @date Dec 31, 2013
 	 * @param value 日期
 	 * @return int
+	 * @throws Exception 
 	 */
-	public static int getCurrentYear(String value) {
+	public static int getCurrentYear(String value) throws Exception{
 		Date date = string2Date(value, DateUtils.DATE_YEAR);
 		Calendar calendar = getCalendar(date, DateUtils.DATE_YEAR);
 		return calendar.get(Calendar.YEAR);
@@ -550,8 +534,9 @@ public class DateUtils {
 	 * @date Dec 31, 2013
 	 * @param value 日期
 	 * @return int
+	 * @throws Exception 
 	 */
-	public static int getCurrentMonth(String value) {
+	public static int getCurrentMonth(String value) throws Exception{
 		Date date = string2Date(value, DateUtils.DATE_MONTH);
 		Calendar calendar = getCalendar(date, DateUtils.DATE_MONTH);
 		
@@ -576,8 +561,9 @@ public class DateUtils {
 	 * @date Dec 31, 2013
 	 * @param value 日期
 	 * @return int
+	 * @throws Exception 
 	 */
-	public static int getCurrentDay(String value){
+	public static int getCurrentDay(String value) throws Exception{
 		Date date = string2Date(value, DateUtils.DATE_DAY);
 		Calendar calendar = getCalendar(date, DateUtils.DATE_DAY);
 		
@@ -590,8 +576,9 @@ public class DateUtils {
 	 * @date Dec 31, 2013
 	 * @param value 日期
 	 * @return String
+	 * @throws Exception 
 	 */
-	public static String getCurrentWeek(Date value) {
+	public static String getCurrentWeek(Date value) throws Exception{
 		Calendar calendar = getCalendar(value, DateUtils.DATE_FORMAT1);
 		int weekIndex = calendar.get(Calendar.DAY_OF_WEEK) - 1 < 0 ? 0 : calendar.get(Calendar.DAY_OF_WEEK) - 1;
 		
@@ -604,8 +591,9 @@ public class DateUtils {
 	 * @date Dec 31, 2013
 	 * @param value 日期
 	 * @return String
+	 * @throws Exception 
 	 */
-	public static String getCurrentWeek(String value) {
+	public static String getCurrentWeek(String value) throws Exception{
 		Date date = string2Date(value, DateUtils.DATE_FORMAT1);
 		return getCurrentWeek(date);
 	}
@@ -629,8 +617,9 @@ public class DateUtils {
 	 * @param value 日期
 	 * @return
 	 * @return int
+	 * @throws Exception 
 	 */
-	public static int getCurrentHour(String value) {
+	public static int getCurrentHour(String value) throws Exception{
 		Date date = string2Date(value, DateUtils.DATE_HOUR);
 		Calendar calendar = getCalendar(date, DateUtils.DATE_HOUR);
 		
@@ -655,8 +644,9 @@ public class DateUtils {
 	 * @date Dec 31, 2013
 	 * @param value 日期
 	 * @return int
+	 * @throws Exception 
 	 */
-	public static int getCurrentMinute(String value){
+	public static int getCurrentMinute(String value) throws Exception{
 		Date date = string2Date(value, DateUtils.DATE_MINUTE);
 		Calendar calendar = getCalendar(date, DateUtils.DATE_MINUTE);
 		
@@ -676,8 +666,9 @@ public class DateUtils {
      * @param endDay 被比较的时间  为空(null)则为当前时间    
      * @param stype 返回值类型   0为多少天，1为多少个月，2为多少年    
      * @return int
+	 * @throws Exception 
      */    
-    public static int compareDate(String startDay,String endDay,int stype) {     
+    public static int compareDate(String startDay,String endDay,int stype) throws Exception{     
         int n = 0;     
         startDay = formatDate(startDay, "yyyy-MM-dd");
         endDay = formatDate(endDay, "yyyy-MM-dd");
@@ -697,8 +688,8 @@ public class DateUtils {
         try {     
             c1.setTime(df.parse(startDay));     
             c2.setTime(df.parse(endDay));   
-        } catch (Exception e) {    
-        	e.printStackTrace();
+        } catch (Exception e) {     
+        	throw new Exception("时间转换出错..");
         }     
         while (!c1.after(c2)) {                   // 循环对比，直到相等，n 就是所要的结果     
             n++;     
@@ -724,8 +715,9 @@ public class DateUtils {
      * @param endTime 需要被比较的时间 若为空则默认当前时间
      * @param type 1：小时   2：分钟   3：秒
      * @return int
+     * @throws Exception 
      */
-    public static int compareTime(String startTime , String endTime , int type) {
+    public static int compareTime(String startTime , String endTime , int type) throws Exception{
     	//endTime是否为空，为空默认当前时间
     	if(endTime == null || "".equals(endTime)){
     		endTime = getCurrentTime();
@@ -747,7 +739,7 @@ public class DateUtils {
 				value = (int) (between % 60 / 60);
 			}
 		} catch (ParseException e) {
-			e.printStackTrace();
+			throw new Exception("时间转换出错..");
 		}
     	return value;
     }
@@ -792,8 +784,9 @@ public class DateUtils {
      * @param value
      * @param format
      * @return
+     * @throws Exception 
      */
-    public static Timestamp string2Timestamp(String value){
+    public static Timestamp string2Timestamp(String value) throws Exception{
     	Timestamp ts = new Timestamp(System.currentTimeMillis());  
     	ts = Timestamp.valueOf(value);
     	return ts;
